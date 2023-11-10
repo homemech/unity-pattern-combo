@@ -5,26 +5,25 @@ namespace Tutorial.PatternCombo
     /// <summary>
     /// This script defines a set of classes that represent display commands for various gameplay buttons.
     /// 
-    /// Each command class implements the IGameplayDisplayCommand and IButtonDisplayTransform interfaces, 
-    /// encapsulating the visual feedback logic that corresponds to player input actions.
-    ///
     /// The classes manage the display lifecycle of their associated button visualizations, such as activation, 
     /// deactivation, and resetting. This encapsulation allows for a modular and extensible system where new display 
     /// behaviors can be added with minimal impact on the existing system, adhering to the Open/Closed principle.
     /// 
-    /// By utilizing a pooling system for efficient resource management, these commands contribute to a performant 
-    /// visual representation of player actions, aiding both in-game feedback and debugging processes.
+    /// Buttons (but not D-Pad) utilize a pooling system for efficient resource management. 
     /// </summary>
-    public class DPadUpDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class DPadUpDisplayCommand : IGameplayDisplayCommand
     {
+        // Reference to the DPad display that this command will act upon.
         private DPadDisplay _dPadDisplay;
-        public Transform ButtonTransform => _dPadDisplay.transform;
 
+        // Constructor to initialize the command with a specific DPad display.
         public DPadUpDisplayCommand(DPadDisplay dPadDisplay)
         {
             _dPadDisplay = dPadDisplay;
         }
 
+        // Executes the display logic for the DPad up direction. 
+        // If the DPad display is not active, it activates it. Otherwise, it resets the display.
         public void ExecuteDisplay()
         {
             if (!_dPadDisplay.gameObject.activeInHierarchy)
@@ -34,13 +33,11 @@ namespace Tutorial.PatternCombo
             }
             _dPadDisplay.Reset();
         }
-
     }
 
-    public class DPadDownDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class DPadDownDisplayCommand : IGameplayDisplayCommand
     {
         private DPadDisplay _dPadDisplay;
-        public Transform ButtonTransform => _dPadDisplay.transform;
 
         public DPadDownDisplayCommand(DPadDisplay dPadDisplay)
         {
@@ -58,10 +55,9 @@ namespace Tutorial.PatternCombo
         }
     }
 
-    public class DPadLeftDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class DPadLeftDisplayCommand : IGameplayDisplayCommand
     {
         private DPadDisplay _dPadDisplay;
-        public Transform ButtonTransform => _dPadDisplay.transform;
 
         public DPadLeftDisplayCommand(DPadDisplay dPadDisplay)
         {
@@ -78,10 +74,9 @@ namespace Tutorial.PatternCombo
         }
     }
 
-    public class DPadRightDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class DPadRightDisplayCommand : IGameplayDisplayCommand
     {
         private DPadDisplay _dPadDisplay;
-        public Transform ButtonTransform => _dPadDisplay.transform;
 
         public DPadRightDisplayCommand(DPadDisplay dPadDisplay)
         {
@@ -99,30 +94,35 @@ namespace Tutorial.PatternCombo
         }
     }
 
-    public class XButtonDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class XButtonDisplayCommand : IGameplayDisplayCommand
     {
+        // This pool manages the recycling of ButtonDisplay objects to optimize performance.
         private ButtonDisplayPool _gameplayButtonDisplayPool;
-        public Transform ButtonTransform { get; private set; }
 
+        // Constructor to initialize the command with a reference to the ButtonDisplayPool.
         public XButtonDisplayCommand(ButtonDisplayPool gameplayButtonDisplayPool)
         {
             _gameplayButtonDisplayPool = gameplayButtonDisplayPool;
         }
 
+        // Executes the display logic for the X button, utilizing an object pool for efficient resource management.
         public void ExecuteDisplay()
         {
+            // Retrieve a ButtonDisplay object from the pool to minimize instantiation overhead.
             var buttonDisplay = _gameplayButtonDisplayPool.GetPooledButtonDisplay();
+            
+            // Acquire the designated color for the X button from the settings object.
             var color = _gameplayButtonDisplayPool.ButtonDisplaySettings.XButtonColor;
-            ButtonTransform = buttonDisplay.transform;
+
+            // Set up the button display with the appropriate label and color, and make it active in the scene.
             buttonDisplay.Setup("X", color, _gameplayButtonDisplayPool);
             buttonDisplay.gameObject.SetActive(true);
         }
     }
 
-    public class YButtonDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class YButtonDisplayCommand : IGameplayDisplayCommand
     {
         private ButtonDisplayPool _gameplayButtonDisplayPool;
-        public Transform ButtonTransform { get; private set; }
 
         public YButtonDisplayCommand(ButtonDisplayPool gameplayButtonDisplayPool)
         {
@@ -133,16 +133,14 @@ namespace Tutorial.PatternCombo
         {
             var buttonDisplay = _gameplayButtonDisplayPool.GetPooledButtonDisplay();
             var color = _gameplayButtonDisplayPool.ButtonDisplaySettings.YButtonColor;
-            ButtonTransform = buttonDisplay.transform;
             buttonDisplay.Setup("Y", color, _gameplayButtonDisplayPool);
             buttonDisplay.gameObject.SetActive(true);
         }
     }
 
-    public class AButtonDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class AButtonDisplayCommand : IGameplayDisplayCommand
     {
         private ButtonDisplayPool _gameplayButtonDisplayPool;
-        public Transform ButtonTransform { get; private set; }
 
         public AButtonDisplayCommand(ButtonDisplayPool gameplayButtonDisplayPool)
         {
@@ -153,16 +151,14 @@ namespace Tutorial.PatternCombo
         {
             var buttonDisplay = _gameplayButtonDisplayPool.GetPooledButtonDisplay();
             var color = _gameplayButtonDisplayPool.ButtonDisplaySettings.AButtonColor;
-            ButtonTransform = buttonDisplay.transform;
             buttonDisplay.Setup("A", color, _gameplayButtonDisplayPool);
             buttonDisplay.gameObject.SetActive(true);
         }
     }
 
-    public class BButtonDisplayCommand : IGameplayDisplayCommand, IButtonDisplayTransform
+    public class BButtonDisplayCommand : IGameplayDisplayCommand
     {
         private ButtonDisplayPool _gameplayButtonDisplayPool;
-        public Transform ButtonTransform { get; private set; }
 
         public BButtonDisplayCommand(ButtonDisplayPool gameplayButtonDisplayPool)
         {
@@ -173,7 +169,6 @@ namespace Tutorial.PatternCombo
         {
             var buttonDisplay = _gameplayButtonDisplayPool.GetPooledButtonDisplay();
             var color = _gameplayButtonDisplayPool.ButtonDisplaySettings.BButtonColor;
-            ButtonTransform = buttonDisplay.transform;
             buttonDisplay.Setup("B", color, _gameplayButtonDisplayPool);
             buttonDisplay.gameObject.SetActive(true);
         }
