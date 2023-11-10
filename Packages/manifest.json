@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.unity.analytics": "3.8.1",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.inputsystem": "1.6.3",
