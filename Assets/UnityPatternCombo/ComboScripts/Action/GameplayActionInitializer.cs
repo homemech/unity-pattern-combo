@@ -25,26 +25,26 @@ namespace Tutorial.PatternCombo
         public SideFighterControls GameplayControls { get; private set; }
 
         // Responsible for invoking the gameplay actions based on commands issued
-        private GameplayActionCommandInvoker _invoker;
+        private GameplayActionCommandInvoker _actionCommandInvoker;
 
         public void Awake()
         {
             GameplayControls = new SideFighterControls();
-            InitializeInvokerAndQueueManager();
+            InitializeCommandInvoker();
             InitializeGameplayActionControllers();
         }
 
-        private void InitializeInvokerAndQueueManager()
+        private void InitializeCommandInvoker()
         {
-            _invoker = new GameplayActionCommandInvoker();
+            _actionCommandInvoker = new GameplayActionCommandInvoker();
         }
 
 
         // Initializes the action controllers that manage input-to-action translation and command handling
         private void InitializeGameplayActionControllers()
         {
-            _buttonActionController.Initialize(GameplayControls, _invoker, _comboActionQueueManager);
-            DPadActionController.Initialize(GameplayControls, _invoker, _comboActionQueueManager);
+            _buttonActionController.Initialize(GameplayControls, _actionCommandInvoker, _comboActionQueueManager);
+            DPadActionController.Initialize(GameplayControls, _actionCommandInvoker, _comboActionQueueManager);
         }
 
         private void OnEnable()

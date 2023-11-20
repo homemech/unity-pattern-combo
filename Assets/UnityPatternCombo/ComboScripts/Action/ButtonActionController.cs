@@ -47,7 +47,6 @@ namespace Tutorial.PatternCombo
 
         // Below are handlers for each button press. They create a new command instance specific to the button,
         // add it to the combo sequence, and then execute the command.
-
         private void HandleXButtonActionCommand()
         {
             var xButtonCommand = new XButtonActionCommand();

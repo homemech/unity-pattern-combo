@@ -39,7 +39,6 @@ namespace Tutorial.PatternCombo
         /// </summary>
         /// <param name="sequence">The sequence of gameplay action commands to check.</param>
         /// <returns>True if the sequence matches the combo pattern; otherwise, false.</returns>
-
         public bool IsMatch(IEnumerable<IGameplayActionCommand> sequence);
 
         /// <summary>
@@ -52,3 +51,7 @@ namespace Tutorial.PatternCombo
         public IGameplayActionCommand GetResultingComboCommand();
     }
 }
+
+
+
+

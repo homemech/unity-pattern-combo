@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Tutorial.PatternCombo
 {
-    /// <summary>
+ /// <summary>
     /// Manages a command queue for executing combos, interfacing closely with ComboMatchEngine.
     /// Mimics a traditional fighting game's input buffer, handling command sequences within a dynamic time window for combos.
     /// </summary>
@@ -85,8 +85,8 @@ namespace Tutorial.PatternCombo
             }
         }
 
-        // Manages the queue size to prevent overflow and maintain a focus on recent player inputs,
-        // balancing memory considerations with gameplay mechanics.
+        // Manages the queue size to prevent overflow and maintain a focus on recent player inputs
+        // again, reducing the load on the match engine
         private void DequeueOldestCommandIfNecessary()
         {
             if (_comboSequence.Count >= _maxComboLengthBeforeTrim)

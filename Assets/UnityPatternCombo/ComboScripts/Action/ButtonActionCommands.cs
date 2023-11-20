@@ -12,7 +12,6 @@ namespace Tutorial.PatternCombo
     /// testability of our command objects. This follows the Command pattern, which helps in
     /// queuing, logging actions, and undo operations.
     /// </summary>
-
     public class DPadUpActionCommand : IGameplayActionCommand
     {
         // Example: Injecting a PlayerCharacter dependency
@@ -26,7 +25,7 @@ namespace Tutorial.PatternCombo
 
         public void ExecuteAction()
         {
-            // Example: Actual game logic to make the character jump
+            // Example: Actual game logic for the character jump
             // _playerCharacter.Jump();
         }
     }

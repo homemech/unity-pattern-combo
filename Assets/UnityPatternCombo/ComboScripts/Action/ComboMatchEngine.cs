@@ -64,9 +64,10 @@ namespace Tutorial.PatternCombo
         public void CheckAndExecuteCombo()
         {
             var comboSequence = _actionQueueManager.GetComboSequence();
-            if (comboSequence.Count < _minimumComboLength) { return; }
 
             // Optimize by only checking for a combo if the sequence meets the minimum length requirement.
+            if (comboSequence.Count < _minimumComboLength) { return; }
+
             IGameplayActionCommand comboCommand = CheckSequenceForCombo(comboSequence);
 
             if (comboCommand != null)

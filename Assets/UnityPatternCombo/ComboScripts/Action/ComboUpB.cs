@@ -32,7 +32,7 @@ namespace Tutorial.PatternCombo
             var sequenceArray = sequence.ToArray();
 
             // Early exit if the sequence is shorter than the number of commands in the combo.
-            if (sequenceArray.Length < 2)
+            if (sequenceArray.Length < ComboLength)
             {
                 return false;
             }
@@ -55,3 +55,5 @@ namespace Tutorial.PatternCombo
         }
     }
 }
+
+
