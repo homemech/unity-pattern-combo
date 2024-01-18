@@ -10,4 +10,4 @@ https://unity.com/resources/level-up-your-code-with-game-programming-patterns
 
 Open **PatternComboDemo** in the UnityPatternCombo folder. 
 
-**Note:** Given the arcade/action style of the project, it requires a **game controller**. That said, you can edit the SideFighterControls input actions in the **ComboScripts** folder if you would like to add keyboard buttons. 
+**Note:** This project requires a **game controller** given the arcade/action game style of the combo system. That said, you can edit the SideFighterControls input actions in the **ComboScripts** folder if you would like to add keyboard buttons. 
