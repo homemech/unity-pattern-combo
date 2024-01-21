@@ -38,8 +38,7 @@ namespace Tutorial.PatternCombo
         {
             _actionCommandInvoker = new GameplayActionCommandInvoker();
         }
-
-
+        
         // Initializes the action controllers that manage input-to-action translation and command handling
         private void InitializeGameplayActionControllers()
         {

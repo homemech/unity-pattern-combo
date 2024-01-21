@@ -29,7 +29,8 @@ namespace Tutorial.PatternCombo
         public bool IsMatch(IEnumerable<IGameplayActionCommand> sequence)
         {
             // Convert the sequence to an array to facilitate direct indexing.
-            var sequenceArray = sequence.ToArray();
+            // Materialize only the part of the sequence needed for this rule.
+            var sequenceArray = sequence.Take(ComboLength).ToArray();
 
             // Early exit if the sequence is shorter than the number of commands in the combo.
             if (sequenceArray.Length < ComboLength)

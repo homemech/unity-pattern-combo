@@ -21,7 +21,7 @@ namespace Tutorial.PatternCombo
 
         public bool IsMatch(IEnumerable<IGameplayActionCommand> sequence)
         {
-            var sequenceArray = sequence.ToArray();
+            var sequenceArray = sequence.Take(ComboLength).ToArray();
 
             if (sequenceArray.Length < ComboLength)
             {

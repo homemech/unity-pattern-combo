@@ -74,6 +74,7 @@ namespace Tutorial.PatternCombo
             {
                 ExecuteComboAction(comboCommand);
                 ComboEventSystem.OnNewCombo.Invoke();
+                _actionQueueManager.ClearComboSequence();
             }
         }
 
@@ -97,9 +98,11 @@ namespace Tutorial.PatternCombo
         // providing flexibility and robustness to the combo detection mechanism.
         private IGameplayActionCommand CheckSequenceForCombo(Queue<IGameplayActionCommand> comboSequence)
         {
+            // Iterates over the entire combo sequence to check for potential combos starting at each point.
             for (int startIndex = 0; startIndex <= comboSequence.Count; startIndex++)
             {
                 var subsequence = GetSubsequence(comboSequence, startIndex);
+                
                 foreach (IComboRule rule in _comboRules)
                 {
                     if (rule.IsMatch(subsequence))
@@ -120,12 +123,10 @@ namespace Tutorial.PatternCombo
         }
 
         // Once a combo is detected, this method is responsible for executing the associated action.
-        // It also ensures the combo sequence is cleared, resetting the system to accept new input,
-        // which is essential for maintaining the flow of gameplay and preparing for the next combo opportunity.
+        // This might include animations, sound effects, or interactions with other game systems (e.g., scoring, hit detection).
         private void ExecuteComboAction(IGameplayActionCommand comboCommand)
         {
             comboCommand.ExecuteAction();
-            _actionQueueManager.ClearComboSequence();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Tutorial.PatternCombo
         }
 
         // Continuously updates the combo timer, ensuring that combos are time-sensitive.
-        public void ProcessComboUpdate(float deltaTime)
+        private void ProcessComboUpdate(float deltaTime)
         {
             if (_comboSequence.Count == 0) return;
 
